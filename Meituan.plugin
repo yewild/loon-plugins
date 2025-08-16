@@ -1,36 +1,24 @@
-#!name=美团去广告（全面版）
-#!desc=拦截美团网络开屏广告、首页banner、外卖广告及追踪接口
+#!name=爱壹帆去广告
+#!desc=屏蔽爱壹帆开屏广告、页面内广告及追踪接口
 #!author=ChatGPT
 #!date=2025-08-17
 
 [Rule]
-# 广告域名
-DOMAIN-SUFFIX,ad.meituan.com,REJECT
-DOMAIN-SUFFIX,waimaiad.meituan.com,REJECT
-DOMAIN-SUFFIX,analytics.meituan.com,REJECT
-DOMAIN-SUFFIX,track.meituan.com,REJECT
-DOMAIN-KEYWORD,ad.meituan,REJECT
-DOMAIN-KEYWORD,analytics.meituan,REJECT
+# 广告域名（常见爱壹帆广告域名）
+DOMAIN-SUFFIX,ad.iyifan.com,REJECT
+DOMAIN-SUFFIX,analytics.iyifan.com,REJECT
+DOMAIN-SUFFIX,track.iyifan.com,REJECT
+DOMAIN-KEYWORD,ad.iyifan,REJECT
 
 [Rewrite]
-# ===== 开屏广告 / splash =====
-^https?:\/\/wmapi\.meituan\.com\/api\/v\d\/startpicture - reject
-^https?:\/\/api\.meituan\.com\/api\/v\d\/startpicture - reject
-^https?:\/\/apimobile\.meituan\.com\/appupdate\/startpicture - reject
-^https?:\/\/wmapi\.meituan\.com\/api\/v\d\/splash - reject
-^https?:\/\/apimobile\.meituan\.com\/appupdate\/splash - reject
-^https?:\/\/img\d*\.meituan\.net\/adunion\/.*splash - reject
-^https?:\/\/p\d\.meituan\.net\/(bizad|wmbizad)\/.*splash - reject
-^https?:\/\/img\d*\.meituan\.net\/.*\/startpicture - reject
+# 开屏广告 / splash
+^https?:\/\/api\.iyifan\.com\/v\d\/splash - reject
+^https?:\/\/api\.iyifan\.com\/v\d\/startpicture - reject
 
-# ===== 首页 / 外卖广告 / banner / 推荐 =====
-^https?:\/\/wmapi\.meituan\.com\/ad\/ - reject
-^https?:\/\/api\.meituan\.com\/ad\/ - reject
-^https?:\/\/apimobile\.meituan\.com\/.*\/ad\/ - reject
-^https?:\/\/img\.meituan\.net\/.*\/ad\/ - reject
-^https?:\/\/p\d\.meituan\.net\/(bizad|wmbizad)\/.*banner - reject
-^https?:\/\/wmapi\.meituan\.com\/api\/v\d\/recommend - reject
+# 页面内广告 / banner
+^https?:\/\/api\.iyifan\.com\/v\d\/ad\/ - reject
+^https?:\/\/img\.iyifan\.com\/ad\/ - reject
 
-# ===== 数据埋点 / 追踪上报 =====
-^https?:\/\/track\.meituan\.com\/ - reject
-^https?:\/\/analytics\.meituan\.com\/ - reject
+# 数据埋点 / 追踪
+^https?:\/\/track\.iyifan\.com\/ - reject
+^https?:\/\/analytics\.iyifan\.com\/ - reject
