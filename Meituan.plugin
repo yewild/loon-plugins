@@ -1,5 +1,5 @@
-#!name=美团去广告
-#!desc=全面屏蔽美团开屏广告、首页banner、外卖广告及追踪
+#!name=美团去广告（全面版）
+#!desc=拦截美团网络开屏广告、首页banner、外卖广告及追踪接口
 #!author=ChatGPT
 #!date=2025-08-17
 
@@ -17,11 +17,13 @@ DOMAIN-KEYWORD,analytics.meituan,REJECT
 ^https?:\/\/wmapi\.meituan\.com\/api\/v\d\/startpicture - reject
 ^https?:\/\/api\.meituan\.com\/api\/v\d\/startpicture - reject
 ^https?:\/\/apimobile\.meituan\.com\/appupdate\/startpicture - reject
-^https?:\/\/img\.meituan\.net\/adunion\/.*splash - reject
+^https?:\/\/wmapi\.meituan\.com\/api\/v\d\/splash - reject
+^https?:\/\/apimobile\.meituan\.com\/appupdate\/splash - reject
+^https?:\/\/img\d*\.meituan\.net\/adunion\/.*splash - reject
 ^https?:\/\/p\d\.meituan\.net\/(bizad|wmbizad)\/.*splash - reject
 ^https?:\/\/img\d*\.meituan\.net\/.*\/startpicture - reject
 
-# ===== 首页 / 外卖广告 / banner =====
+# ===== 首页 / 外卖广告 / banner / 推荐 =====
 ^https?:\/\/wmapi\.meituan\.com\/ad\/ - reject
 ^https?:\/\/api\.meituan\.com\/ad\/ - reject
 ^https?:\/\/apimobile\.meituan\.com\/.*\/ad\/ - reject
