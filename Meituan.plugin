@@ -1,24 +1,12 @@
-#!name=爱壹帆去广告
-#!desc=屏蔽爱壹帆开屏广告、页面内广告及追踪接口
+#!name=Bilibili 去开屏广告
+#!desc=去除哔哩哔哩开屏广告
 #!author=ChatGPT
-#!date=2025-08-17
+#!system=ios
 
-[Rule]
-# 广告域名（常见爱壹帆广告域名）
-DOMAIN-SUFFIX,ad.iyifan.com,REJECT
-DOMAIN-SUFFIX,analytics.iyifan.com,REJECT
-DOMAIN-SUFFIX,track.iyifan.com,REJECT
-DOMAIN-KEYWORD,ad.iyifan,REJECT
+[Script]
+# 去开屏广告接口
+http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/list requires-body=1,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_splash.js,tag=去开屏广告
+http-response ^https:\/\/app\.bilibili\.com\/x\/v2\/splash\/show requires-body=1,script-path=https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/bilibili/bilibili_splash.js,tag=去开屏广告
 
-[Rewrite]
-# 开屏广告 / splash
-^https?:\/\/api\.iyifan\.com\/v\d\/splash - reject
-^https?:\/\/api\.iyifan\.com\/v\d\/startpicture - reject
-
-# 页面内广告 / banner
-^https?:\/\/api\.iyifan\.com\/v\d\/ad\/ - reject
-^https?:\/\/img\.iyifan\.com\/ad\/ - reject
-
-# 数据埋点 / 追踪
-^https?:\/\/track\.iyifan\.com\/ - reject
-^https?:\/\/analytics\.iyifan\.com\/ - reject
+[MITM]
+hostname = app.bilibili.com
