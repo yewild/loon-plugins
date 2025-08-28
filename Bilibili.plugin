@@ -1,0 +1,10 @@
+#!name=Bilibili 跳转助手
+#!desc=把B站视频网页重写成 jump.local 域名，交给快捷指令处理
+#!author=ChatGPT
+#!version=1.0
+
+[Rewrite]
+^https:\/\/www\.bilibili\.com\/video\/(BV[0-9A-Za-z]+) https://jump.local/bilibili/$1 302
+
+[MITM]
+hostname = www.bilibili.com
