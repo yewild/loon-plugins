@@ -1,10 +1,26 @@
-#!name=Bilibili 跳转助手
-#!desc=把B站视频网页重写成 jump.local 域名，交给快捷指令处理
-#!author=ChatGPT
-#!version=1.0
+#!name=Bilibili Redirect
+#!desc=点击B站网页直跳App
+#!system=ios
 
-[Rewrite]
-^https:\/\/www\.bilibili\.com\/video\/(BV[0-9A-Za-z]+) https://jump.local/bilibili/$1 302
+[Script]
+http-request ^https?:\/\/www\.bilibili\.com\/video\/(BV\w+) script-path=inline:bilibili.js
+http-request ^https?:\/\/b23\.tv\/(\w+) script-path=inline:bilibili.js
 
-[MITM]
-hostname = www.bilibili.com
+[ScriptContent]
+#!name=bilibili.js
+
+let url = $request.url;
+
+// BV号匹配
+let bvMatch = url.match(/\/video\/(BV\w+)/);
+if (bvMatch) {
+  $done({response: { status: 302, headers: { Location: `bilibili://video/${bvMatch[1]}` } }});
+}
+
+// 短链匹配
+let short = url.match(/b23\.tv\/(\w+)/);
+if (short) {
+  $done({response: { status: 302, headers: { Location: `bilibili://video/${short[1]}` } }});
+}
+
+$done({});
